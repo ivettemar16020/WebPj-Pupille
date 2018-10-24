@@ -37,6 +37,7 @@ const subject = combineReducers({
   order,
 });
 
+export const getSubject = (state, id) => state.byId[id];
 export const getSubjects = (state) => state.order.map(
   id => getSubject(state, id),
 );

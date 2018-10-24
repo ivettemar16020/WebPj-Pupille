@@ -45,8 +45,8 @@ class SignInModal extends Component {
     }
 }
 
-export default SignInModal
-/*
+//export default SignInModal
+
 export default connect(
     undefined,
     dispatch => ({
@@ -54,5 +54,5 @@ export default connect(
         dispatch(actions.createUser(uuid(), username,email, password));
       }
     })
-  )(SignInModal);
-  */
+)(SignInModal);
+  

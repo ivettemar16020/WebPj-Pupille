@@ -36,10 +36,11 @@ const theme = combineReducers({
   byId,
   order,
 });
-
+export const getTheme = (state, id) => state.byId[id];
 export const getThemes = (state) => state.order.map(
   id => getTheme(state, id),
 );
 
+export const getCardsIdsInTheme = (state) => state.order;
 
 export default theme;

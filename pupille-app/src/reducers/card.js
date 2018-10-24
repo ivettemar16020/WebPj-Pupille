@@ -37,6 +37,7 @@ const card = combineReducers({
   order,
 });
 
+export const getCard = (state, id) => state.byId[id];
 export const getTheme = (state) => state.order.map(
   id => getCard(state, id),
 );

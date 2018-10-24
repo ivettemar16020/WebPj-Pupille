@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
+import card, * as fromCard from './card';
 import theme, * as fromTheme from './theme';
 import subject, * as fromSubject from './subject';
 
 const reducer = combineReducers({
-  theme,
-  subject,
+    card,
+    theme,
+    subject,
 });
 
 export default reducer;
@@ -25,4 +27,4 @@ export const getThemes = (state,id) =>
 export const getSubjects = (state,id) =>
     fromSubject.getSubjects(state.subject);
 
-export const getCardsInTheme = (state) => fromCard.getCardsIdsInTheme(state.card).map(id => fromTheme.getCard(state.theme, id).question);
+export const getCardsInTheme = (state) => fromTheme.getCardsIdsInTheme(state.theme).map(id => fromCard.getCard(state.card, id).question);
