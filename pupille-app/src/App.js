@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import SignIn from './containers/SignIn';
+import SignInModal from './components/SignInModal';
 
 //https://fontawesome.com/
 
@@ -17,7 +17,7 @@ class App extends Component {
         </nav>
         <div className="Content">
           <div className="content-wrapper">
-            <SignIn/>
+            <SignInModal/>
           </div>
         </div>
       </div>
