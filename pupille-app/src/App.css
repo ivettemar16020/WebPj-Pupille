@@ -30,26 +30,28 @@
   }
 }
 
-nav {
+ul {
+ 
   list-style-type: none;
   color: white;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: #2d3047;
+  align-content: right;
 }
 
 
-a {
+Link {
+  float: right;
   display: block;
-  float: left;
   color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
-a:hover {
+Link:hover {
   background-color: #3b4369;
 }
 
