@@ -9,8 +9,7 @@ class SignInModal extends Component {
         const { onSubmit } = this.props;
         return(
             <div className='container'>
-                <h3 className="h3
-                ">Crear un usuario</h3>
+                <h3 className="h3">Crear un usuario</h3>
                 <input className="h5"
                     type="text"
                     placeholder="Usuario"
@@ -40,7 +39,7 @@ class SignInModal extends Component {
                         }
                     }
                     >
-                    Ingresar
+                    Crear
                 </button>
             </div>
         )

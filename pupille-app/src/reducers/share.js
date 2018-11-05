@@ -1,0 +1,3 @@
+/*el usuaro tegna un key de own cardsids que sean sus tarjetas
+y sharecardsids es de otras que le compartieron
+reductor sharecard y userid de la card y a ese usuario de le mete el id de la lista*/
