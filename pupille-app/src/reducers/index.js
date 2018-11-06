@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
+import { reducer as reduxFormReducer } from 'redux-form';
 
 import card, * as fromCard from './card';
 import theme, * as fromTheme from './theme';
 import subject, * as fromSubject from './subject';
 
 const reducer = combineReducers({
+    form: reduxFormReducer,
     card,
     theme,
     subject,
@@ -28,3 +30,4 @@ export const getSubjects = (state,id) =>
     fromSubject.getSubjects(state.subject);
 
 export const getCardsInTheme = (state) => fromTheme.getCardsIdsInTheme(state.theme).map(id => fromCard.getCard(state.card, id).question);
+

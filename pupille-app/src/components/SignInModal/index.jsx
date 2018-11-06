@@ -1,59 +1,40 @@
 import uuid from 'uuid-v4';
-import React, { Component,Fragment } from 'react';
+import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import './signInModal.css';
+import React from 'react'
 
-class SignInModal extends Component {
-    render() {
-        const { onSubmit } = this.props;
-        return(
-            <div className='container'>
-                <h3 className="h3">Crear un usuario</h3>
-                <input className="h5"
-                    type="text"
-                    placeholder="Usuario"
-                    ref={ node => { this.userInput = node; } }
-                />
-                <input className="h5"
-                    type="text"
-                    placeholder="Correo"
-                    ref={ node => { this.mailInput = node; } }
-                />
-                <input className="h5"
-                    type="password"
-                    placeholder="Contraseña"
-                    ref={ node => { this.passwordInput = node; } }
-                />
-                <button className="h5"
-                    onClick={
-                        () => {
-                        onSubmit(
-                            this.mailInput.value,
-                            this.passwordInput.value,
-                        );
 
-                        this.mailInput.value = "";
-                        this.passwordInput.value = "";
-                        this.mailInput.focus();
-                        }
-                    }
-                    >
-                    Crear
-                </button>
-            </div>
-        )
-    }
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+    <div>
+        <label>{label}</label>
+        <div>
+        <input {...input} placeholder={label} type={type}/>
+        {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+        </div>
+    </div>
+    )
+
+const SignInForm = (props) => {
+  const { handleSubmit, submitting } = props
+  return (
+    <form onSubmit={handleSubmit}>
+      <Field name="username" type="text"
+        component={renderField} label="Username"
+      />
+      <Field name="email" type="email"
+        component={renderField} label="Email"
+      />
+      <Field name="pw" type="password"
+        component={renderField} label="Password"
+      />
+      <div>
+        <button type="submit" disabled={submitting}>Crear</button>
+      </div>
+    </form>
+  )
 }
 
-//export default SignInModal
-
-export default connect(
-    undefined,
-    dispatch => ({
-      onSubmit(username,email,password) {
-        dispatch(actions.createUser(uuid(), username,email, password));
-      }
-    })
-)(SignInModal);
-  
+export default reduxForm({
+  form: 'signInForm' 
+})(SignInForm)

@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import { reducer as reduxFormReducer } from 'redux-form';
 
 import reducer from './reducers';
 
@@ -11,3 +12,5 @@ const configureStore = () => {
 };
 
 export default configureStore;
+
+
