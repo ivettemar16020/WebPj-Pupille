@@ -15,20 +15,21 @@ export const createUser = (
     }
 });
 
-export const logIn = (id,mail,password) => ({
+export const logIn = (token, id, email) => ({
     type: types.USER_LOGGED_IN, 
     payload: {
+        token,
         id, 
-        mail,
-        password
+        email,
     }
 });
 
-export const logOut = (id,mail,password) => ({
+
+export const logOut = (id,email,password) => ({
     type: types.USER_LOGGED_OUT, 
     payload: {
         id, 
-        mail,
+        email,
         password
     }
 });
