@@ -2,10 +2,12 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Card from '../Card';
+import * as selectors from '../../reducers';
 
 
-const CardList = ({ cards = [] }) => (
+const Theme = ({ cards = [] }) => (
   <Fragment>
+    <h1 className="h5">{name}</h1>
     <ul>
       {
         cards.length > 0
@@ -16,4 +18,4 @@ const CardList = ({ cards = [] }) => (
   </Fragment>
 );
 
-export default CardList;
+export default Theme;
