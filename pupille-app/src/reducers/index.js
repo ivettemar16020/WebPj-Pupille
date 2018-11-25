@@ -4,12 +4,14 @@ import { reducer as reduxFormReducer } from 'redux-form';
 import card, * as fromCard from './card';
 import theme, * as fromTheme from './theme';
 import subject, * as fromSubject from './subject';
+import { user } from './user';
 
 const reducer = combineReducers({
     form: reduxFormReducer,
     card,
     theme,
     subject,
+    user,
 });
 
 export default reducer;

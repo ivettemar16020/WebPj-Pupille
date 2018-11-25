@@ -24,6 +24,24 @@ export const logIn = (token, id, email) => ({
     }
 });
 
+export const requestLogIn = (id, email, password) => ({
+    type: types.REQUEST_USER_LOGIN, 
+    payload: {
+        id, 
+        email,
+        password,
+    }
+});
+
+export const receiveLogIn = (token, id, email) => ({
+    type: types.RECEIVE_USER_LOGIN, 
+    payload: {
+        id, 
+        token,
+        email,
+    }
+});
+
 
 export const logOut = (id,email,password) => ({
     type: types.USER_LOGGED_OUT, 
