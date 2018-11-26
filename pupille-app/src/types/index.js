@@ -1,4 +1,5 @@
 export const USER_CREATED = 'USER_CREATED';
+export const REQUEST_USER_SIGNIN = 'REQUEST_USER_SIGNIN';
 
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const CARD_CREATED = 'CARD_CREATED';

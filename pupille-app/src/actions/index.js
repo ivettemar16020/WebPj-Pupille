@@ -6,13 +6,19 @@ export const createUser = (
     password, 
     email,
 ) => ({
-    type: types.USER_CREATED, 
+    type: types.REQUEST_USER_SIGNIN, 
     payload: {
         id, 
         username, 
         password, 
         email, 
     }
+});
+
+export const signIn = (
+) => ({
+    type: types.USER_CREATED, 
+    payload: {}
 });
 
 export const logIn = (token, id, email) => ({
