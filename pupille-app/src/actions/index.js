@@ -1,17 +1,15 @@
 import * as types from '../types';
 
 export const createUser = (
-    id, 
-    username, 
-    password, 
+    username,  
     email,
+    password,
 ) => ({
     type: types.REQUEST_USER_SIGNIN, 
     payload: {
-        id, 
         username, 
-        password, 
         email, 
+        password,
     }
 });
 

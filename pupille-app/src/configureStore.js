@@ -1,16 +1,25 @@
-import { createStore, combineReducers } from 'redux';
-import { reducer as reduxFormReducer } from 'redux-form';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import reducer from "./reducers";
+import Root  from './sagas';
+import { all } from 'redux-saga/effects';
 
-import reducer from './reducers';
+const sagaMiddleware = createSagaMiddleware();
 
+export default function configureStore(preloadedState) {
+    const create = 
+        typeof window !== 'undefined'
+        ? (window.devToolsExtension
+        ? window.devToolsExtension()(createStore)
+        : createStore)
+        : createStore;
 
-const configureStore = () => {
-  return createStore(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  );
-};
+        const middlewares = [sagaMiddleware];
 
-export default configureStore;
+        const createStoreWithMiddleware = applyMiddleware(...middlewares)(create);
 
+        const store = createStoreWithMiddleware(reducer, preloadedState);
+        sagaMiddleware.run(Root);
 
+        return store;
+}

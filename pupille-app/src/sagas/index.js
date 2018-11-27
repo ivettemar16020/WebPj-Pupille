@@ -3,7 +3,7 @@ import * as types from '../types';
 import { fetchLogIn, postSignIn, postLogIn } from './user'; 
 
 
-export default function* root() {
+function* Root() {
   /*
     yield all([
       fork(watchNavigate),
@@ -14,4 +14,6 @@ export default function* root() {
     ])*/
     yield takeLatest(types.REQUEST_USER_SIGNIN, postSignIn); 
     yield takeLatest(types.REQUEST_USER_LOGIN, fetchLogIn); 
-  }
+}
+
+export default Root; 

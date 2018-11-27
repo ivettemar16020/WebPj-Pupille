@@ -37,7 +37,7 @@ export default compose(
     }),
     ( dispatch ) => ({
       login(values) {
-        dispatch(actions.createUser(values.username, values.password, values.email));
+        dispatch(actions.createUser(values.username,  values.email, values.password));
         this.props.history.push(routes.SIGNIN)
       }
     })
