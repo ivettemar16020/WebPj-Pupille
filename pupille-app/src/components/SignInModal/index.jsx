@@ -1,7 +1,4 @@
-import uuid from 'uuid-v4';
 import { Field, reduxForm } from 'redux-form'
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
 import React from 'react'
 
 const required = value => value ? undefined : 'Este campo es obligatorio'
