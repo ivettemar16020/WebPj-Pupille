@@ -4,7 +4,7 @@ import { reducer as reduxFormReducer } from 'redux-form';
 import card, * as fromCard from './card';
 import theme, * as fromTheme from './theme';
 import subject, * as fromSubject from './subject';
-import { user } from './user';
+import user, * as fromUser  from './user';
 
 const reducer = combineReducers({
     form: reduxFormReducer,
@@ -15,6 +15,8 @@ const reducer = combineReducers({
 });
 
 export default reducer;
+
+export const getUser = (state) => fromUser.getUser(state.user);
 
 export const getCard = (state,id) =>
     fromCard.getCard(state.card, id);

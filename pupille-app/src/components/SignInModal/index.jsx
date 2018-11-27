@@ -1,5 +1,5 @@
 import { Field, reduxForm } from 'redux-form'
-import React from 'react'
+import React, {Component} from 'react'
 
 const required = value => value ? undefined : 'Este campo es obligatorio'
 const email = value =>
@@ -20,29 +20,42 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
     </div>
     )
 
-const SignInForm = (props) => {
-  const { handleSubmit, submitting } = props
-  return (
-    <form onSubmit={handleSubmit}>
-      <Field name="username" type="text"
-        component={renderField} label="Username"
-        validate={required}
-      />
-      <Field name="email" type="email"
-        component={renderField} label="Email"
-        validate={email}
-      />
-      <Field name="pw" type="password"
-        component={renderField} label="Password"
-        validate={[required,password]}
-      />
-      <div>
-        <button type="submit" disabled={submitting}>Crear</button>
-      </div>
-    </form>
-  )
+class SignInModal extends Component {
+  render() {
+    const { handleSubmit } = this.props; 
+    return (
+      <form >
+        <Field 
+          name="username" 
+          type="text"
+          id = "username"
+          component={renderField} 
+          label="Username"
+          validate={required}
+        />
+        <Field 
+          name="email" 
+          type="email"
+          id = "email"
+          component={renderField} 
+          label="Email"
+          validate={email}
+        />
+        <Field 
+          name="pw" 
+          type="password"
+          id = "password"
+          component={renderField} label="Password"
+          validate={[required,password]}
+        />
+        <div>
+          <button type="submit">Crear</button>
+        </div>
+      </form>
+    )
+  }
 }
 
 export default reduxForm({
-  form: 'signInForm' 
-})(SignInForm)
+  form: 'signInModal' 
+})(SignInModal)

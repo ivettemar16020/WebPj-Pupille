@@ -2,7 +2,7 @@ import * as types from '../types';
 
 const initialState = user ? { loggedIn: true, user } : {};
 
-export function user(state = initialState, action) {
+const user = (state = initialState, action) => {
   switch (action.type) {
     case types.REQUEST_USER_LOGIN:
       return {
@@ -22,3 +22,12 @@ export function user(state = initialState, action) {
       return state
   }
 }
+
+//selector
+export const getUser = (state) => ({
+  token: state.token,
+  uid: state.uid,
+  email: state.email,
+})
+
+export default user;

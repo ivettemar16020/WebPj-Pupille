@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import SignInModal from './components/SignInModal';
+import SignInModal from './components/SignInModal/index.js';
 import * as actions from '../../../actions'
 import { connect } from "react-redux";
 import { compose } from 'recompose';
-import {
-  Route,
-  Redirect,
-} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import * as routes from '../../../routes'
 import { getUser } from '../../../reducers'
 
@@ -15,12 +12,13 @@ class SignInApp extends Component {
   render() {
     const { login, auth } = this.props
     console.log(this.props);
+    console.log("entrando");
     
     return (
       !auth ?
-      <div className = "container">
-        <div className="row">
-          <h1>Sign Up</h1>
+      <div >
+        <div>
+          <h1>Sign In</h1>
         </div>
         <SignInModal
           onSubmit={values => login(values)}
