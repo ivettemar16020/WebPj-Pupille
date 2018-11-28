@@ -47,8 +47,8 @@ class LogInModal extends Component {
 export default connect(
     undefined,
     dispatch => ({
-      onSubmit(email,password) {
-        dispatch(actions.createUser(uuid(), email, password));
+      onSubmit(uuui, email,password) {
+        dispatch(actions.createUser(uuid, email, password));
       }
     })
 )(LogInModal);

@@ -7,8 +7,8 @@ import {startSubmit, stopSubmit, reset} from 'redux-form';
 export function* createUser(action){
     yield put(startSubmit('signInModal'));
     let errors = {};
-    const {username, password, email } = action.payload;
-    const newUser = yield call(postUser, `${API_URL}/users/`, {username, password, email});
+    const {username, email, password } = action.payload;
+    const newUser = yield call(postUser, `${API_URL}/users/`, {username, email, password});
     if(Object.keys(newUser).length === 1){
      yield put({type: 'REQUEST_FAILED', errors: newUser.username});
       errors = newUser.username;

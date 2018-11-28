@@ -43,7 +43,8 @@ const SignInModal = ({ handleSubmit }) => (
       name="pw" 
       type="password"
       id = "password"
-      component={renderField} label="Password"
+      component={renderField} 
+      label="Password"
       validate={[required]}
     />
     <div>
