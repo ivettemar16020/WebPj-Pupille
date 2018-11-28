@@ -12,7 +12,7 @@ const SubjectList = ({ subjects = [] , name}) => (
       {
         subjects.length > 0
           ? subjects.map(({ id }) => <Subject key={id} id={id} />)
-          : <li>No hay !</li>
+          : <li>No hay ninguna materia</li>
       }
       {console.log(subjects)}
 
