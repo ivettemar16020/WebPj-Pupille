@@ -78,11 +78,13 @@ export const deleteCard = id => ({
 
 export const createTheme = (
     id, 
+    name,
     cards, 
 ) => ({
     type: types.THEME_CREATED, 
     payload: {
         id, 
+        name,
         cards, 
     }
 });
@@ -96,11 +98,13 @@ export const deleteTheme = id => ({
 
 export const createSubject = (
     id, 
+    name,
     themes, 
 ) => ({
     type: types.THEME_CREATED, 
     payload: {
         id, 
+        name,
         themes, 
     }
 });

@@ -5,7 +5,7 @@ import Card from '../Card';
 import * as selectors from '../../reducers';
 
 
-const Theme = ({ cards = [] }) => (
+const Theme = ({ name,cards = [] }) => (
   <Fragment>
     <h1 className="h5">{name}</h1>
     <ul>

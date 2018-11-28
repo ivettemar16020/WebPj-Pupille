@@ -19,7 +19,17 @@ const Card = ({question,answer}) => {
     );
 }
 
-export default Card;
+export default connect(
+  (state, { id }) => ({
+    ...state.theme.byId[id],
+  }),
+  (dispatch, { id }) => ({
+    onClick() {
+      dispatch(actions.createCard(id));
+    }
+  }),
+)(Card);
+//export default Card;
 
 
 /*import React, { Component } from 'react';

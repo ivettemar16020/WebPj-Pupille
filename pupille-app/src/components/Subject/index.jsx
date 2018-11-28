@@ -12,10 +12,16 @@ const Subject = ({ themes = [] , name}) => (
       {
         themes.length > 0
           ? themes.map(({ id }) => <Theme key={id} id={id} />)
-          : <li>No hay !</li>
+          : <li>No tienes ninguna materia</li>
       }
     </ul>
   </Fragment>
 );
 
-export default Subject;
+//export default Subject;
+export default connect(
+  state => ({
+    themes: selectors.getThemes(state),
+  }),
+  undefined,
+)(Subject);

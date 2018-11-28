@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
+import NewSubject from '../../components/NewSubject/index';
+import SubjectList from '../../components/SubjectList/index';
 
-const Home = () => {
+class Home extends Component {
+  render() {
     return (
-      <h1>Home</h1>
+      <div >
+        <div>
+          <h1>Home</h1>
+        </div>
+        <NewSubject/>
+        <SubjectList></SubjectList>
+      </div>
     );
+  }
 }
 
 export default Home;
