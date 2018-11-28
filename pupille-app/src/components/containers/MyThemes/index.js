@@ -1,6 +1,6 @@
 import React from 'react';
-import ChismeList from '../../../pages/CreateTheme/index';
+import ThemeList from '../../../pages/CreateTheme/index';
 
-const App = (props) => <ChismeList />;
+const App = (props) => <ThemeList />;
 
 export default App;

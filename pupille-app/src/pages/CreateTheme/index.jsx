@@ -1,57 +1,29 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import AddChisme from '../../components/NewTheme/index';
-import Chisme from '../../components/Theme/index';
+import AddTheme from '../../components/NewTheme/index';
+import Theme from '../../components/Theme/index';
 import uuidv4 from 'uuid/v4';
 
-// styled components declarations
-const ContainerStyle = styled.div`
-  width: 400px;
-  margin: auto;
-  text-align: left;
-  border-top: 1px solid #e4e4e4;
-`;
-
-const HeaderStyle = styled.h2`
-  text-align: center;
-`;
-
-const LoadingStyle = styled.h4`
-  text-align: center;
-`;
-
-class ChismeList extends Component {
+class ThemeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       chismes: [],
       loading: false,
-      newChisme: ''
+      newTheme: ''
     };
-    // these functions are bound so that they update state of the parent
-    //  when passed down as props to child Chisme components
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     //this.postMethod = this.postMethod.bind(this);
   }
 
-  /*
-  async componentDidMount() {
-    fetch('http://127.0.0.1:8000/api/')
-      .then(response => response.json())
-      .then(chismes => this.setState({ chismes , loading: false}))
-      .catch(error => this.setState({ error, isLoading: false }));
-
-  }*/
-
-  async postMethod(addedChisme){
+  async postMethod(addedTheme){
     const headers = new Headers();
     headers.append('Content-Type', 'applicaction/json');
 
     const options = {
       method: 'POST',
       headers,
-      body: JSON.stringify(addedChisme),
+      body: JSON.stringify(addedTheme),
     }
 
     const request = new Request('http://127.0.0.1:8000/api/', options);
@@ -62,27 +34,26 @@ class ChismeList extends Component {
 
   handleChange(e) {
     this.setState({
-      newChisme: e.target.valuetitle
+      newTheme: e.target.valuetitle
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const addedChisme = {
+    const addedTheme = {
       id: uuidv4(),
-      title: this.state.newChisme,
+      title: this.state.newTheme,
       applied: false
     };
     this.setState({
-      chismes: [...this.state.chismes, addedChisme],
-      newChisme: ''
+      chismes: [...this.state.chismes, addedTheme],
+      newTheme: ''
     });
 
-    //this.postMethod(addedChisme);   
-
+    //this.postMethod(addedTheme);   
   }
 
-  toggleChisme(id) {
+  toggleTheme(id) {
     const chismes = this.state.chismes.map(chisme => {
       if (chisme.id === id) {
         chisme.applied = !chisme.applied;
@@ -93,7 +64,7 @@ class ChismeList extends Component {
     this.setState({ chismes });
   }
 
-  removeChisme(id) {
+  removeTheme(id) {
     const chismes = this.state.chismes.filter(chismes => chismes.id !== id);
     this.setState({
       chismes
@@ -102,29 +73,29 @@ class ChismeList extends Component {
 
   render() {
     const companies = (
-      <ContainerStyle>
+      <div className="container">
         {this.state.chismes.map(chisme => (
-          <Chisme
+          <Theme
             // these functions are bound here to lock the ID param to the method
-            toggleChisme={this.toggleChisme.bind(this, chisme.id)}
-            removeChisme={this.removeChisme.bind(this, chisme.id)}
+            toggleTheme={this.toggleTheme.bind(this, chisme.id)}
+            removeTheme={this.removeTheme.bind(this, chisme.id)}
             key={chisme.id}
             {...chisme}
           />
         ))}
-        <AddChisme
+        <AddTheme
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           postMethod={this.postMethod}
-          value={this.state.newChisme}
+          value={this.state.newTheme}
         />
-      </ContainerStyle>
+      </div>
     );
     return (
       <div>
-        <HeaderStyle> Themes </HeaderStyle>
+        <div className="h4"> Themes </div>
         {this.state.loading ? (
-          <LoadingStyle> cargando... </LoadingStyle>
+          <div> cargando... </div>
         ) : (
           companies
         )}
@@ -133,4 +104,4 @@ class ChismeList extends Component {
   }
 }
 
-export default ChismeList;
+export default ThemeList;
