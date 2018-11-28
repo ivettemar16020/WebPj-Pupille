@@ -1,33 +1,63 @@
+import { combineReducers } from 'redux';
 import * as types from '../types';
 
-const initialState = user ? { loggedIn: true, user } : {};
 
-const user = (state = initialState, action) => {
+const byId = (state = {}, action) => {
   switch (action.type) {
-    case types.REQUEST_USER_LOGIN:
+    case types.USER_CREATED:
       return {
-        loggingIn: true,
-        user: action.user
+        ...state,
+        [action.payload.id]: {
+          ...action.payload,
+          isConfirmed: false,
+        },
       };
-    case types.RECEIVE_USER_LOGIN:
+    case types.USER_LOGGED_OUT: {
+      const newState = { ...state };
+      delete newState[action.payload.id];
+      return newState;
+    }
+    case types.REQUEST_USER_SIGNIN: {
+      const newState = { ...state };
+      newState[action.payload.id] = {
+        ...newState[action.payload.id],
+        isConfirmed: true,
+      };
+      return newState;
+    }
+    case types.USER_LOGGED_IN: {
       return {
-        loggedIn: true,
-        user: action.user
-      };
-    case types.FAILURE_USER_LOGIN:
-      return {};
-    case types.USER_LOGGED_OUT:
-      return {};
+        ...state,
+        [action.payload.id]: {
+          ...action.payload,          
+        },
+      }
+    }
     default:
-      return state
+      return state;
   }
-}
+};
 
-//selector
-export const getUser = (state) => ({
-  token: state.token,
-  uid: state.uid,
-  email: state.email,
-})
+const order = (state = [], action) => {
+  switch (action.type) {
+    case types.USER_CREATED:
+      return [...state, action.payload.id];
+    case types.USER_LOGGED_OUT:
+      return state.filter(id => id !== action.payload.id);
+    default:
+      return state;
+  }
+};
 
-export default user;
+
+export default combineReducers({
+  byId,
+  order,
+});
+
+//Selectores 
+export const getUser = (state, id) => state.byId[id];
+export const getUserIds = (state) => state.order;
+export const getUsers = (state) => state.order.map(
+  id => getUser(state, id),
+);

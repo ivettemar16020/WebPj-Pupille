@@ -12,7 +12,6 @@ class SignInApp extends Component {
   render() {
     const { login, auth } = this.props
     console.log(this.props);
-    console.log("entrando");
     
     return (
       !auth ?

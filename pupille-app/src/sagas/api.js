@@ -1,4 +1,4 @@
-const url = 'http://127.0.0.1:8000/pupille/v1/';
+export const API_URL = 'http://localhost:8000/pupille/v1';
 
 export const change = (url, token, method, body) => fetch(url, {
     method: method,
@@ -41,12 +41,11 @@ export const post = (url, token, data) => {
 }
 
 export const postUser = (url, data) => {
-    console.log(data, 'entrando22');
-
     return fetch(url, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': "*",
         },
         body: JSON.stringify({
         ...data
@@ -70,8 +69,4 @@ function* getThemesFromAPI() {
     const themes = yield response.status === 200 ? JSON.parse(response.__bodyInit): []
     return themes;
 }*/
-
-export const Api = {
-    url
-};
 

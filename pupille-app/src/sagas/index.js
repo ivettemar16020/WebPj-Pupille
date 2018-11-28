@@ -1,19 +1,11 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import * as types from '../types';
-import { fetchLogIn, postSignIn, postLogIn } from './user'; 
+import { createUser} from './user'; 
 
 
 function* Root() {
-  /*
-    yield all([
-      fork(watchNavigate),
-      fork(watchLoadUserPage),
-      fork(watchLoadRepoPage),
-      fork(watchLoadMoreStarred),
-      fork(watchLoadMoreStargazers)
-    ])*/
-    yield takeLatest(types.REQUEST_USER_SIGNIN, postSignIn); 
-    yield takeLatest(types.REQUEST_USER_LOGIN, fetchLogIn); 
+    yield takeLatest(types.REQUEST_USER_SIGNIN, createUser); 
+    //yield takeLatest(types.REQUEST_USER_LOGIN, fetchLogIn); 
 }
 
 export default Root; 

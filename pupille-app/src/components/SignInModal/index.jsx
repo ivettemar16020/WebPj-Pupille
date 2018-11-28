@@ -1,5 +1,6 @@
-import { Field, reduxForm } from 'redux-form'
-import React, {Component} from 'react'
+import { Field, reduxForm } from 'redux-form';
+import React, {Component} from 'react';
+import * as actions from '../../actions/index';
 
 const required = value => value ? undefined : 'Este campo es obligatorio'
 const email = value =>
@@ -20,42 +21,44 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
     </div>
     )
 
-class SignInModal extends Component {
-  render() {
-    const { handleSubmit } = this.props; 
-    return (
-      <form >
-        <Field 
-          name="username" 
-          type="text"
-          id = "username"
-          component={renderField} 
-          label="Username"
-          validate={required}
-        />
-        <Field 
-          name="email" 
-          type="email"
-          id = "email"
-          component={renderField} 
-          label="Email"
-          validate={email}
-        />
-        <Field 
-          name="pw" 
-          type="password"
-          id = "password"
-          component={renderField} label="Password"
-          validate={[required,password]}
-        />
-        <div>
-          <button type="submit">Crear</button>
-        </div>
-      </form>
-    )
-  }
-}
+const SignInModal = ({ handleSubmit }) => (
+  <form onSubmit={handleSubmit}>
+    <Field 
+      name="username" 
+      type="text"
+      id = "username"
+      component={renderField} 
+      label="Username"
+      validate={required}
+    />
+    <Field 
+      name="email" 
+      type="email"
+      id = "email"
+      component={renderField} 
+      label="Email"
+      validate={email}
+    />
+    <Field 
+      name="pw" 
+      type="password"
+      id = "password"
+      component={renderField} label="Password"
+      validate={[required]}
+    />
+    <div>
+      <button type="submit">Crear</button>
+    </div>
+  </form>
+)
 
 export default reduxForm({
-  form: 'signInModal' 
-})(SignInModal)
+  form: 'SignInModal',
+  onSubmit(values, dispatch) {
+    dispatch(actions.createUser(
+      values.email,
+      values.password,
+      values.username,
+    )); 
+  }
+})(SignInModal);

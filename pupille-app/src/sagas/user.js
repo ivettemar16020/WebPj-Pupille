@@ -1,27 +1,31 @@
 import { call, put } from 'redux-saga/effects';
 import * as actions from '../actions';
-import {postUser} from './api';
+import {postUser, API_URL} from './api';
+import {startSubmit, stopSubmit, reset} from 'redux-form';
 
-//POST
 
-export function* postLogIn(action){
-
-}
-
-export function* postSignIn(action){
-    const { username, password, email } = action.payload;
-    const newUser = yield call(postUser, `http://127.0.0.1:8000/pupille/v1/users`, {username, password, email});
-    yield put(actions.signIn())
-
+export function* createUser(action){
+    yield put(startSubmit('signInModal'));
+    let errors = {};
+    const {username, password, email } = action.payload;
+    const newUser = yield call(postUser, `${API_URL}/users/`, {username, password, email});
+    if(Object.keys(newUser).length === 1){
+     yield put({type: 'REQUEST_FAILED', errors: newUser.username});
+      errors = newUser.username;
+      alert(newUser.username)
+    }else{ 
+      alert("Nuevo usuario creado")
+      yield put(reset('signInModal'));
+    }
+    yield put(stopSubmit('signInModal', errors));
 }
 
 
 //Fetch
-
 export function* fetchLogIn(action) {
     const { email, password } = action.payload;
     console.log(email, password);
-    const user = yield call(postUser, `http://127.0.0.1:8000/pupille/v1/auth-jwt/`, email, password);
+    const user = yield call(postUser, `${API_URL}/auth-jwt/`, email, password);
     console.log(user);
     yield put(actions.receiveLogIn(user.token, user.userid, user.mail));
 }
