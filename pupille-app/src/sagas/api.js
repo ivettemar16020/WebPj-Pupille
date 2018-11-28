@@ -1,18 +1,5 @@
 export const API_URL = 'http://localhost:8000/pupille/v1';
 
-export const change = (url, token, method, body) => fetch(url, {
-    method: method,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `JWT ${token}`
-    },
-    body: body ? JSON.stringify(body) : {}
-  })
-    .then(response => method !== 'DELETE' ? response.json() : response);
-  
-  
-  
 export const get = (url, token) => 
     fetch(url, {
         method: 'GET',
@@ -57,6 +44,20 @@ export const postUser = (url, data) => {
 
 //Get themes
 /*
+
+export const fetchThemes = (url, data) => {
+    return fetch(url, {
+        method: 'GET',
+        headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': "*",
+        },
+        body: '',
+        })
+    })
+    .then( response => response.json() )
+    .catch( error => error );
+}
 function* getThemesFromAPI() {
     const response = yield fetch(url, {
         method = 'GET', 
