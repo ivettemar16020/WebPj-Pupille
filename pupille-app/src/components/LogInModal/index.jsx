@@ -1,55 +1,60 @@
-import uuid from 'uuid-v4';
-import React, { Component,Fragment } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import { Field, reduxForm } from 'redux-form';
+import React, {Component} from 'react';
+import * as actions from '../../actions/index';
+import './logInModal.css';
 
-class LogInModal extends Component {
-    render() {
-        const { onSubmit } = this.props;
-        return(
-            <div className='container'>
-                <h3 className="h3
-                ">Iniciar sesión</h3>
 
-                <input className="h5"
-                    type="text"
-                    placeholder="Correo"
-                    ref={ node => { this.mailInput = node; } }
-                />
-                <input className="h5"
-                    type="password"
-                    placeholder="Contraseña"
-                    ref={ node => { this.passwordInput = node; } }
-                />
-                <button className="h5"
-                    onClick={
-                        () => {
-                        onSubmit(
-                            this.mailInput.value,
-                            this.passwordInput.value,
-                        );
+const required = value => value ? undefined : 'Este campo es obligatorio'
+const emailCheck = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+  'Dirección de correo inválida' : undefined
+const passwordCheck = value =>
+  value && !/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6}$/i.test(value) ?
+    'Contraseña insegura' : undefined
+    
 
-                        this.mailInput.value = "";
-                        this.passwordInput.value = "";
-                        this.mailInput.focus();
-                        }
-                    }
-                    >
-                    Ingresar
-                </button>
-            </div>
-        )
-    }
-}
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+  <div className="element">
+    <label>{label}</label>
+    <input {...input} placeholder={label} type={type}/>
+    {touched && ((error && <div className="MyError">{error}</div>) || (warning && <div className="MyWarning">{warning}</div>))}
+  </div>
+)
 
-//export default LogInModal
+const LogInModal = ({ handleSubmit }) => (
+  <div className="card">
+    <form onSubmit={handleSubmit} className="card-body">
+    <h4 class="card-title">Ingresar a una cuenta</h4>
+      <Field 
+        name="email" 
+        type="email"
+        id = "email"
+        component={renderField} 
+        label="Email"
+        validate={[required,emailCheck]}
+      />
+      <Field 
+        name="pw" 
+        type="password"
+        id = "password"
+        component={renderField} 
+        label="Password"
+        validate={required}
+        warning={passwordCheck}
+      />
+      <div>
+        <button className="btn btn-info btn-lg" type="submit">Ingresar</button>
+      </div>
+    </form>
+  </div>
+)
 
-export default connect(
-    undefined,
-    dispatch => ({
-      onSubmit(uuui, email,password) {
-        dispatch(actions.createUser(uuid, email, password));
-      }
-    })
-)(LogInModal);
-  
+export default reduxForm({
+  form: 'LogInModal',
+  onSubmit(values, dispatch) {
+    dispatch(actions.createUser(
+      values.password,
+      values.username,
+    )); 
+  }
+})(LogInModal);
